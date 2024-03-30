@@ -35,6 +35,7 @@ export class ProductDetailsComponent implements OnInit {
       next: product => {
         this.product = product
         this.bcService.set('@productDetails', product.name)
+        // needs the .pipe(take(1)) to unsubscribe since this isnt a api call
         this.basketService.basketSource$.pipe(take(1)).subscribe({
           next: basket => {
             const item = basket?.items.find(x => x.id === +id)
